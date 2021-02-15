@@ -33,34 +33,34 @@ const initState = {
   },
   orders: [
     {
-      customerId: "",
-      uen: "",
-      menuId: "",
-      status: ""
+      customerId: "1111",
+      uen: "2222",
+      menuId: "3333",
+      status: "cancelled" // in_progress, completed
     }
   ],
   stalls: [
     {
       date: 0,
-      uen: "",
-      name: "",
-      password: "",
+      uen: "2222",
+      name: "name",
+      password: "1111",
       operatinghours: {
-        monday: { open: 0, close: 0 },
-        tuesday: { open: 0, close: 0 },
-        wednesday: { open: 0, close: 0 },
-        thursday: { open: 0, close: 0 },
-        friday: { open: 0, close: 0 },
-        saturday: { open: 0, close: 0 },
-        sunday: { open: 0, close: 0 }
+        monday: { open: 8, close: 17 },
+        tuesday: { open: 8, close: 17 },
+        wednesday: { open: 8, close: 17 },
+        thursday: { open: 8, close: 17 },
+        friday: { open: 8, close: 17 },
+        saturday: { open: 8, close: 17 },
+        sunday: { open: 8, close: 17 }
       },
       menu: [
         {
-          name: "",
-          description: "",
-          image: "",
-          available: false,
-          price: 0
+          name: "name",
+          description: "description",
+          image: "https://idental.com.sg/wp-content/uploads/soft-food-for-braces-1200x675.png",
+          available: true,
+          price: 12
         }
       ]
     }

@@ -13,6 +13,8 @@ const Login = (props) => {
   return (
     <div>
       HOME
+      Favourites, Previous orders
+
     </div>
   )
 }
