@@ -1,8 +1,7 @@
 import React from 'react';
 import {
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 import { Provider } from 'react-redux'
@@ -16,6 +15,12 @@ import NavBar from './components/NavBar'
 import Login from './pages/Login'
 import Registration from './pages/Registration'
 import Home from './pages/Home'
+import Hawkers from './pages/Hawkers'
+import Hawker from './pages/Hawker'
+import Stall from './pages/Stall'
+import Menu from './pages/Menu'
+import Cart from './pages/Cart'
+import Error from './pages/404'
 
 import './App.css';
 
@@ -41,6 +46,12 @@ function App() {
           <Switch>
             <Route path="/registration"><Registration /></Route>
             <Route path="/login"><Login /></Route>
+            <Route path="/hawkers"><Hawkers /></Route>
+            <Route path="/hawker/:id"><Hawker /></Route>
+            <Route path="/stall/:id"><Stall /></Route>
+            <Route path="/menu/:id"><Menu /></Route>
+            <Route path="/cart"><Cart /></Route>
+            <Route exact path="/404"><Error /></Route>
             <Route exact path="/"><Home /></Route>
           </Switch>
         </div>

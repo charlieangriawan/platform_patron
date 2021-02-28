@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { login } from '../redux/reducers/main'
 
 
-const Login = (props) => {
+const Home = (props) => {
   const [form, setForm] = useState({ phone: "", password: "" })
   const handleLogin = () => {
     console.log(form)
@@ -25,4 +25,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
