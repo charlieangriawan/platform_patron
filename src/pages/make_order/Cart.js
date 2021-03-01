@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { navigate, updateCart } from '../redux/reducers/main'
-import { findInList, isFalse } from '../common/functions'
-import ButtonCard from '../components/ButtonCard'
+import { navigate, updateCart } from '../../redux/reducers/main'
+import { findInList, isFalse } from '../../common/functions'
+import ButtonCard from '../../components/ButtonCard'
 
 const Cart = (props) => {
   const [menu, setMenu] = useState(0);

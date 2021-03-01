@@ -2,7 +2,7 @@ import hawkers from './states/hawker'
 import stalls from './states/stalls'
 import menus from './states/menus'
 export default {
-  backend: false,
+  backend: true,
   user: {
     date: 0,
     phone: "",
@@ -47,7 +47,7 @@ export default {
       specialOrder: "No ketchup"
     }
   ],
-  menus,
-  stalls,
-  hawkers
+  menus: [],
+  stalls: [],
+  hawkers: []
 }
