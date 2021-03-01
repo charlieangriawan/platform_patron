@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { navigate } from '../redux/reducers/main'
-import HCard from '../components/HCard'
+import { navigate, getAllCenters } from '../../redux/reducers/main'
+import HCard from '../../components/HCard'
 
-const Hawker = (props) => {
+const Hawkers = (props) => {
 
   useEffect(() => {
     if (props.redux.main.hawkers.length < 1) {
-      // make request
+      props.getAllCenters();
     }
   }, [])
 
@@ -35,8 +35,8 @@ const Hawker = (props) => {
 
 const mapStateToProps = redux => ({ redux })
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ navigate }, dispatch)
+  return bindActionCreators({ navigate, getAllCenters }, dispatch)
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Hawker);
+export default connect(mapStateToProps, mapDispatchToProps)(Hawkers);
