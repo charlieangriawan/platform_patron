@@ -14,15 +14,16 @@ export const isFalse = (variable) => {
   return !variable
 }
 export const openingHours = (operatingHours) => {
-  const date = new Date()
+  const date = new Date(2021, 2, 7);
   const day = date.getDay()
-  if (day == 0) return operatingHours.monday
-  if (day == 1) return operatingHours.tuesday
-  if (day == 2) return operatingHours.wednesday
-  if (day == 3) return operatingHours.thursday
-  if (day == 4) return operatingHours.friday
-  if (day == 5) return operatingHours.saturday
-  if (day == 6) return operatingHours.sunday
+  console.log(day)
+  if (day == 1) return operatingHours.monday
+  if (day == 2) return operatingHours.tuesday
+  if (day == 3) return operatingHours.wednesday
+  if (day == 4) return operatingHours.thursday
+  if (day == 5) return operatingHours.friday
+  if (day == 6) return operatingHours.saturday
+  if (day == 0) return operatingHours.sunday
   return null
 }
 export const isOpen = (openingHours) => {
