@@ -15,11 +15,11 @@ import NavBar from './components/NavBar'
 import Login from './pages/Login'
 import Registration from './pages/Registration'
 import Home from './pages/Home'
-import Hawkers from './pages/Hawkers'
-import Hawker from './pages/Hawker'
-import Stall from './pages/Stall'
-import Menu from './pages/Menu'
-import Cart from './pages/Cart'
+import Hawkers from './pages/make_order/Hawkers'
+import Hawker from './pages/make_order/Hawker'
+import Stall from './pages/make_order/Stall'
+import Menu from './pages/make_order/Menu'
+import Cart from './pages/make_order/Cart'
 import Error from './pages/404'
 
 import './App.css';
@@ -49,7 +49,7 @@ function App() {
             <Route path="/hawkers"><Hawkers /></Route>
             <Route path="/hawker/:id"><Hawker /></Route>
             <Route path="/stall/:id"><Stall /></Route>
-            <Route path="/menu/:id"><Menu /></Route>
+            <Route path="/menu"><Menu /></Route>
             <Route path="/cart"><Cart /></Route>
             <Route exact path="/404"><Error /></Route>
             <Route exact path="/"><Home /></Route>

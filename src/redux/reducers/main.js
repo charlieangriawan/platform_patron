@@ -25,6 +25,30 @@ export default function(state = initState, action) {
           action.data
         ]
       }
+    case 'ADD_HAWKER':
+      return {
+        ...state,
+        hawkers: [
+          ...state.hawkers.filter((ele) => ele._id != action.data._id),
+          action.data
+        ]
+      }
+    case 'ADD_STALL':
+      return {
+        ...state,
+        stalls: [
+          ...state.stalls.filter((ele) => ele.uen != action.data.uen),
+          action.data
+        ]
+      }
+    case 'ADD_MENU':
+      return {
+        ...state,
+        menus: [
+          ...state.menus.filter((ele) => ele._id != action.data._id),
+          action.data
+        ]
+      }
     default:
       return state
   }
@@ -87,31 +111,63 @@ export const updateCart = (form) => {
   }
 }
 
-
-
-
-
-
-
-
+export const getAllCenters = () => {
+  return (dispatch, getState) => {
+    if (getState().main.backend) {
+      axios({
+        method: 'get',
+        url: `https://jiak-api.vitaverify.me/api/v1/customer/hawkercenter/retrieve`,
+        withCredentials: true
+      })
+        .then(function (res) {
+          console.log(res)
+          for (let k = 0; k < res.data.length; k++) {
+            dispatch({ type: 'ADD_HAWKER', data: res.data[k] });
+            const map_id = res.data[k]._id
+            for (let i = 0; i < res.data[k].stalls.length; i++) {
+              const uen = res.data[k].stalls[i].uen
+              dispatch({ type: 'ADD_STALL', data: { ...res.data[k].stalls[i], map_id } });
+              for (let j = 0; j < res.data[k].stalls[i].menu.length; j++) {
+                dispatch({ type: 'ADD_MENU', data: { ...res.data[k].stalls[i].menu[j], uen } });
+              }
+            }
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+    } else {
+      // do nothing
+    }
+  }
+}
 
 export const getHawkers = (form) => {
   return (dispatch, getState) => {
     if (getState().main.backend) {
       axios({
-        method: 'post',
-        url: 'https://jiak-api.vitaverify.me/api/v1/customer/map',
-        data: form,
+        method: 'get',
+        url: `https://jiak-api.vitaverify.me/api/v1/customer/hawkercenter/get?id=${form.id}`,
         withCredentials: true
       })
         .then(function (res) {
-          console.log(res);
-          update(dispatch, "LOGIN", form, "/")
+          console.log(res)
+          const map_id = res.data._id
+          dispatch({ type: 'ADD_HAWKER', data: res.data });
+          for (let i = 0; i < res.data.stalls.length; i++) {
+            const uen = res.data.stalls[i].uen
+            dispatch({ type: 'ADD_STALL', data: { ...res.data.stalls[i], map_id } });
+            for (let j = 0; j < res.data.stalls[i].menu.length; j++) {
+              dispatch({ type: 'ADD_MENU', data: { ...res.data.stalls[i].menu[j], uen } });
+            }
+          }
         })
         .catch(function (error) {
           console.log(error);
         })
-    } else { update(dispatch, "LOGIN", form, "/") }
+    } else {
+      // do nothing
+    }
   }
 }
 
@@ -119,18 +175,48 @@ export const getStalls = (form) => {
   return (dispatch, getState) => {
     if (getState().main.backend) {
       axios({
-        method: 'post',
-        url: 'https://jiak-api.vitaverify.me/api/v1/customer/auth/register',
-        data: form,
+        method: 'get',
+        url: `https://jiak-api.vitaverify.me/api/v1/customer/stall?uen=${form.uen}`,
         withCredentials: true
       })
         .then(function (res) {
           console.log(res);
-          update(dispatch, "LOGIN", form, "/")
+          const uen = res.data.uen
+          dispatch({ type: 'ADD_STALL', data: res.data });
+          for (let j = 0; j < res.data.menu.length; j++) {
+            dispatch({ type: 'ADD_MENU', data: { ...res.data.menu[j], uen } });
+          }
         })
         .catch(function (error) {
           console.log(error);
         })
-    } else { update(dispatch, "LOGIN", form, "/") }
+    } else {
+      // do nothing
+    }
   }
+}
+
+export const getMenu = (form) => {
+  return (dispatch, getState) => {
+    if (getState().main.backend) {
+      axios({
+        method: 'get',
+        url: `https://jiak-api.vitaverify.me/api/v1/customer/dish?uen=${form.uen}&menuId=${form.id}`,
+        withCredentials: true
+      })
+        .then(function (res) {
+          console.log(res);
+          dispatch({ type: 'ADD_MENU', data: res.data });
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+    } else {
+      // do nothing
+    }
+  }
+}
+
+export const makeOrder = (form) => {
+  
 }

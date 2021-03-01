@@ -1,49 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { navigate } from '../redux/reducers/main'
-import { findInList, getParam, isFalse, openingHours, isOpen } from '../common/functions'
-import HCard from '../components/HCard'
+import { navigate, getHawkers } from '../../redux/reducers/main'
+import { findInList, getParam, isFalse, openingHours, isOpen } from '../../common/functions'
+import HCard from '../../components/HCard'
 
 const Hawker = (props) => {
   const [hawker, setHawker] = useState(0);
 
   useEffect(() => {
     let num = null;
-    let counter = 0
-    do {
-      num = findInList(props.redux.main.hawkers, "_id", getParam(props.redux.router.location.pathname, "/hawker/"));
-      if (isFalse(num)) {
-        // get hawker
-      }
-      if (counter++ >= 5) {
-        props.navigate(`/404`)
-        break;
-      }
-    } while (num == null || isFalse(num));
+    num = findInList(props.redux.main.hawkers, "_id", getParam(props.redux.router.location.pathname, "/hawker/"));
+    if (isFalse(num)) {
+      // get hawker
+      props.getHawkers({ id: getParam(props.redux.router.location.pathname, "/hawker/") })
+    }
     setHawker(num);
-  }, [])
-
-
-  /**
- * 
- * @param {string} image
- * @param {func} onClick
- * @param {string} title
- * @param {string} classname optional
- * @param {string} line1 optional
- * @param {string} line2 optional
- * @param {string} line3 optional
- * @param {string} l1Class classname optional
- * @param {string} l2Class classname optional
- * @param {string} l3Class classname optional
- */
+  }, [props.redux.main.hawkers])
 
   return (
     <div>
       Hawker
       {
-        props.redux.main.hawkers[hawker].stalls.map((ele, num) => {
+        props.redux.main.hawkers[hawker] && props.redux.main.hawkers[hawker].stalls.map((ele, num) => {
           const openHours = openingHours(ele.operatinghours);
           console.log(ele)
           return (
@@ -66,7 +45,7 @@ const Hawker = (props) => {
 
 const mapStateToProps = redux => ({ redux })
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ navigate }, dispatch)
+  return bindActionCreators({ navigate, getHawkers }, dispatch)
 }
 
 
