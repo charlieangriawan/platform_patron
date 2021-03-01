@@ -29,6 +29,8 @@ export const openingHours = (operatingHours) => {
 export const isOpen = (openingHours) => {
   const date = new Date()
   const hour = date.getHours();
+  // if a stall is close for the day
+  if (openingHours == null) return false;
   if (openingHours.open < hour && openingHours.close > hour) return true;
   return false;
 }

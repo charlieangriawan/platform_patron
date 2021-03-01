@@ -64,5 +64,5 @@ export default [
         price: 1.5
       }
     ]
-  }
+  },
 ]

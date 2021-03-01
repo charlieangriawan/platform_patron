@@ -39,4 +39,5 @@ export default [
         image: "https://media.istockphoto.com/photos/traditional-style-hainan-coffee-in-vintage-mug-picture-id484841844?k=6&m=484841844&s=612x612&w=0&h=aPhp5o8F2ysUuaCxBQbZv0E3n4hRTvxRf7gEtaRUDX4=",
         price: 1.5
     }
+    
 ]
