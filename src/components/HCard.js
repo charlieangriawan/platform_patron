@@ -36,8 +36,8 @@ const HCard = (props) => {
           }}
         />
       </div>
-      <div className="card-block text-start text-truncate p-3">
-        <div className="card-title em-15">{props.title}</div>
+      <div className="card-block text-start p-3">
+        <div className="card-title elements-hawker-centres-list em-15" style={{ color: "#000000", fontWeight: 600, fontSize: '16px', textAlign: 'left'}}> {props.title}</div>
         <div className={`card-text ${props.l1Class ? props.l1Class : ""}`}>{props.line1}</div>
         <div className={`card-text ${props.l2Class ? props.l2Class : ""}`}>{props.line2}</div>
         <div className={`card-text ${props.l3Class ? props.l3Class : ""}`}>{props.line3}</div>

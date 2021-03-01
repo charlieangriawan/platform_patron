@@ -2,7 +2,7 @@ export default [
   {
     _id:"602a185442aa3b5c074a241e",
     name:"Amoy Street Food Centre",
-    image:"https://media-cdn.tripadvisor.com/media/photo-s/0a/d7/c2/ec/amoy-street-food-centre.jpg",
+    image:"https://lh3.googleusercontent.com/GHHEKBmJwfvb3llg2DpVK9Yq9gBq2xEaM3fhjtVMk866rKFetbNan7UKiozPut_2QfwlO6DUFEAzsMQbWD5nJrBxdK5UiEuodh8GW-4",
     stalls: [
       {
         operatinghours: {
