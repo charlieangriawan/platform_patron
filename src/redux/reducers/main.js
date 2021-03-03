@@ -49,6 +49,16 @@ export default function(state = initState, action) {
           action.data
         ]
       }
+    case 'ADD_ORDERS':
+      return {
+        ...state,
+        orders: action.data
+      }
+    case 'DELETE_CART':
+      return {
+        ...state,
+        cart: null
+      }
     default:
       return state
   }
@@ -217,6 +227,74 @@ export const getMenu = (form) => {
   }
 }
 
-export const makeOrder = (form) => {
-  
+export const retrieveOrders = () => {
+  return (dispatch, getState) => {
+    if (getState().main.backend) {
+      axios({
+        method: 'get',
+        url: `https://jiak-api.vitaverify.me/api/v1/customer/order`,
+        withCredentials: true
+      })
+      .then(function (res) {
+        console.log(res);
+        dispatch({ type: 'ADD_ORDERS', data: res.data })
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+    }
+  }
+}
+
+export const makeOrder = () => {
+  return (dispatch, getState) => {
+    if (getState().main.backend) {
+      let cart = getState().main.cart
+      cart = cart.sort((a, b) => b.uen - a.uen)
+      let start = 0
+      for (let i = 0; i < cart.length - 1; i++) {
+        if (cart[i].uen != cart[i + 1].uen) {
+          axios({
+            method: 'post',
+            url: `https://jiak-api.vitaverify.me/api/v1/customer/order`,
+            data: {
+              uen: cart[start].uen,
+              orderList: cart.slice(start, i + 1)
+            },
+            withCredentials: true
+          })
+          .then(function (res) {
+            console.log(res);
+          })
+          .catch(function (error) {
+            console.log(error);
+            return
+          })
+          console.log(cart.slice(start, i + 1))
+          start = i + 1
+        }
+      }
+      if (start != cart.length) {
+        axios({
+          method: 'post',
+          url: `https://jiak-api.vitaverify.me/api/v1/customer/order`,
+          data: {
+            uen: cart[start].uen,
+            orderList: cart.slice(start, cart.length + 1)
+          },
+          withCredentials: true
+        })
+        .then(function (res) {
+          console.log(res);
+        })
+        .catch(function (error) {
+          console.log(error);
+          return
+        })
+      }
+      dispatch({ type: 'DELETE_CART' })
+      const { localStorage } = window;
+      localStorage.removeItem('cs206_cart')
+    }
+  }
 }

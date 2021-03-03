@@ -20,6 +20,8 @@ import Hawker from './pages/make_order/Hawker'
 import Stall from './pages/make_order/Stall'
 import Menu from './pages/make_order/Menu'
 import Cart from './pages/make_order/Cart'
+import Map from './pages/Map'
+import Orders from './pages/make_order/Orders'
 import Error from './pages/404'
 
 import './App.css';
@@ -51,6 +53,8 @@ function App() {
             <Route path="/stall/:id"><Stall /></Route>
             <Route path="/menu"><Menu /></Route>
             <Route path="/cart"><Cart /></Route>
+            <Route path="/map/:id"><Map /></Route>
+            <Route path="/orders"><Orders /></Route>
             <Route exact path="/404"><Error /></Route>
             <Route exact path="/"><Home /></Route>
           </Switch>

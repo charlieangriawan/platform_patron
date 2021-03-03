@@ -31,22 +31,8 @@ export default {
       }
     ]
   },
-  orders: [
-    {
-      customerId: "1111",
-      uen: "2222",
-      menuId: "3333",
-      status: "cancelled", // in_progress, completed
-      quantity: 0
-    }
-  ],
-  cart: [
-    {
-      menuid: "602a2a40139368990648d889",
-      quantity: 2,
-      specialOrder: "No ketchup"
-    }
-  ],
+  orders: null,
+  cart: [],
   menus: [],
   stalls: [],
   hawkers: []
