@@ -24,18 +24,22 @@ const HCard = (props) => {
       className={`card flex-row flex-wrap m-3 ${props.classname}`}
       onClick={props.onClick}
     >
-      <div className="card-header border-0">
-        <img
-          alt=""
-          style={{
-            height: "6em",
-            width: "6em",
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "6em 6em",
-            backgroundImage: `url(${props.image}), url(https://martialartsplusinc.com/wp-content/uploads/2017/04/default-image-620x600.jpg)`
-          }}
-        />
-      </div>
+      {
+        props.image != null ? (
+          <div className="card-header border-0">
+            <img
+              alt=""
+              style={{
+                height: "6em",
+                width: "6em",
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "6em 6em",
+                backgroundImage: `url(${props.image}), url(https://martialartsplusinc.com/wp-content/uploads/2017/04/default-image-620x600.jpg)`
+              }}
+            />
+          </div>
+        ) : <></>
+      }
       <div className="card-block text-start text-truncate p-3">
         <div className="card-title em-15">{props.title}</div>
         <div className={`card-text ${props.l1Class ? props.l1Class : ""}`}>{props.line1}</div>
