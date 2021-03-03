@@ -26,6 +26,9 @@ const NavBar = () => {
             <li className="nav-item">
               <Link to="/map/602a185442aa3b5c074a241e"><a className="nav-link" href="#">map</a></Link>
             </li>
+            <li className="nav-item">
+              <Link to="/orders"><a className="nav-link" href="#">orders</a></Link>
+            </li>
           </ul>
         </div>
       </div>
