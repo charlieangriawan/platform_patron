@@ -21,18 +21,20 @@ const cardCss = {
 const HCard = (props) => {
   return (
     <div
-      className={`card flex-row flex-wrap m-3 ${props.classname}`}
+      className={`card flex-row flex-wrap m-3 em-8 ${props.classname}`}
       onClick={props.onClick}
     >
-      <div className="card-header border-0">
+      <div className="card-header border-0" style={{ borderRadius: 5}}>
         <img
           alt=""
           style={{
-            height: "6em",
-            width: "6em",
+            height: "8em",
+            width: "8em",
             backgroundRepeat: "no-repeat",
-            backgroundSize: "6em 6em",
-            backgroundImage: `url(${props.image}), url(https://martialartsplusinc.com/wp-content/uploads/2017/04/default-image-620x600.jpg)`
+            backgroundSize: "8em 8em",
+            borderRadius: 5,
+            backgroundImage: `url(${props.image}), url(https://martialartsplusinc.com/wp-content/uploads/2017/04/default-image-620x600.jpg)
+            `
           }}
         />
       </div>
