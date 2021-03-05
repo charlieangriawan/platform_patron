@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { navigate, updateCart, getMenu } from '../../redux/reducers/main'
-import { findInList, getParam, isFalse } from '../../common/functions'
+import { findInList, isFalse } from '../../common/functions'
 
 const Menu = (props) => {
   const [menu, setMenu] = useState(0);
@@ -62,14 +62,29 @@ const Menu = (props) => {
                 <button type="button" className="btn btn-primary" onClick={() => setForm({...form, amount: form.amount + 1})}>+</button>
               </div>
               <div
-                onClick={() => props.updateCart({
-                  type: "EDIT_CART",
-                  data: {
-                    menuid: menus[menu]._id,
-                    quantity: form.amount,
-                    specialOrder: form.specialOrder
-                  }
-                })}
+                onClick={() => {
+                  const { localStorage } = window;
+                  let storageCart = localStorage.getItem('cs206_cart')
+                  storageCart = storageCart == null ? [] : JSON.parse(storageCart)
+                  storageCart = storageCart.filter((listItem) => listItem.menuid != menus[menu]._id)
+                  localStorage.setItem('cs206_cart',
+                    JSON.stringify([ ...storageCart, {
+                      menuid: menus[menu]._id,
+                      uen: menus[menu].uen,
+                      quantity: form.amount,
+                      specialOrder: form.specialOrder
+                    }])
+                  )
+                  props.updateCart({
+                    type: "EDIT_CART",
+                    data: {
+                      menuid: menus[menu]._id,
+                      uen: menus[menu].uen,
+                      quantity: form.amount,
+                      specialOrder: form.specialOrder
+                    }
+                  })
+                }}
                 className="btn btn-primary"
               >
                 Add to Cart
