@@ -21,27 +21,25 @@ const cardCss = {
 const HCard = (props) => {
   return (
     <div
-      className={`card flex-row flex-wrap m-3 ${props.classname}`}
+      className={`card flex-row flex-wrap m-3 em-8 ${props.classname}`}
       onClick={props.onClick}
     >
-      {
-        props.image != null ? (
-          <div className="card-header border-0">
-            <img
-              alt=""
-              style={{
-                height: "6em",
-                width: "6em",
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "6em 6em",
-                backgroundImage: `url(${props.image}), url(https://martialartsplusinc.com/wp-content/uploads/2017/04/default-image-620x600.jpg)`
-              }}
-            />
-          </div>
-        ) : <></>
-      }
-      <div className="card-block text-start text-truncate p-3">
-        <div className="card-title em-15">{props.title}</div>
+      <div className="card-header border-0" style={{ borderRadius: 5}}>
+        <img
+          alt=""
+          style={{
+            height: "8em",
+            width: "8em",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "8em 8em",
+            borderRadius: 5,
+            backgroundImage: `url(${props.image}), url(https://martialartsplusinc.com/wp-content/uploads/2017/04/default-image-620x600.jpg)
+            `
+          }}
+        />
+      </div>
+      <div className="card-block text-start p-3">
+        <div className="card-title elements-hawker-centres-list em-15" style={{ color: "#000000", fontWeight: 600, fontSize: '16px', textAlign: 'left'}}> {props.title}</div>
         <div className={`card-text ${props.l1Class ? props.l1Class : ""}`}>{props.line1}</div>
         <div className={`card-text ${props.l2Class ? props.l2Class : ""}`}>{props.line2}</div>
         <div className={`card-text ${props.l3Class ? props.l3Class : ""}`}>{props.line3}</div>

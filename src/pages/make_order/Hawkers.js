@@ -14,7 +14,7 @@ const Hawkers = (props) => {
 
   return (
     <div>
-      Hawkers
+      <div className="headers" > Hawker Centres </div>
       {
         props.redux.main.hawkers.map((ele) => {
           return (
