@@ -5,6 +5,7 @@ import { navigate, getHawkers } from '../../redux/reducers/main'
 import { findInList, getParam, isFalse, openingHours, isOpen } from '../../common/functions'
 import HCard from '../../components/HCard'
 
+
 const Hawker = (props) => {
   const [hawker, setHawker] = useState(0);
 
@@ -24,6 +25,24 @@ const Hawker = (props) => {
       {
         props.redux.main.hawkers[hawker] && props.redux.main.hawkers[hawker].stalls.map((ele, num) => {
           const openHours = openingHours(ele.operatinghours);
+          var openHoursString = ""
+          
+          if (openHours === null) {
+            openHoursString = ""
+          } else if (isOpen(openHours)) {
+            openHoursString = ""
+          } else {
+              if (openHours.open == 0) {
+                openHoursString = ` - Opens at 12AM`
+              } 
+              else if (openHours.open < 12) {
+                openHoursString = ` - Opens at ${openHours.open}AM`
+              } else {
+                openHoursString = ` - Opens at ${openHours.open}PM`
+              }
+
+            }
+
           console.log(ele)
           return (
             <HCard
@@ -33,7 +52,7 @@ const Hawker = (props) => {
               line1={`Menu: ${ele.menu.reduce((prev, curr, index) => {
                 return index == 0 ? curr.name : prev + ', ' + curr.name;
                 }, '')}...`}
-              line2={`${isOpen(openHours) ? "OPEN" : "CLOSE"} - ${openHours.open}00 to ${openHours.close}00`}
+              line2={`${isOpen(openHours) ? "OPEN" : "CLOSED"}${openHoursString}`}
               l2Class={isOpen(openHours) ? "text-success" : "text-danger"}
             />
           )

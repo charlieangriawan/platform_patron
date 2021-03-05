@@ -14,7 +14,7 @@ export const isFalse = (variable) => {
   return !variable
 }
 export const openingHours = (operatingHours) => {
-  const date = new Date(2021, 2, 7);
+  const date = new Date(); // current date
   const day = date.getDay()
   console.log(day)
   if (day == 1) return operatingHours.monday
@@ -30,7 +30,8 @@ export const isOpen = (openingHours) => {
   const date = new Date()
   const hour = date.getHours();
   // if a stall is close for the day
-  if (openingHours == null) return false;
+  if (openingHours === null) return false;
   if (openingHours.open < hour && openingHours.close > hour) return true;
+  
   return false;
 }
