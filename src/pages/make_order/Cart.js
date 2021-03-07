@@ -40,8 +40,8 @@ const Cart = (props) => {
             <ButtonCard
               image={menuItem.image}
               title={menuItem.name}
-              badge={ele.quantity}
-              line1={menuItem.description}
+              badge={ele.quantity}yap
+              line1={`$${ele.quantity*menuItem.price}`}
               b1={() => props.navigate(`/menu/${ele.menuid}`)}
               b1Name="Edit"
               b2={() => {
@@ -60,12 +60,13 @@ const Cart = (props) => {
           )
         })
       }
+      <div>Total: </div>
       <button
         type="button"
         className="btn btn-outline-primary"
         onClick={() => props.makeOrder()}
       >
-        Submit
+        Proceed to Payment
       </button>
     </div>
   )

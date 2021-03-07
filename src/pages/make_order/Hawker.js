@@ -21,7 +21,7 @@ const Hawker = (props) => {
 
   return (
     <div>
-      Hawker
+      <div className="headers" >Stalls</div>
       {
         props.redux.main.hawkers[hawker] && props.redux.main.hawkers[hawker].stalls.map((ele, num) => {
           const openHours = openingHours(ele.operatinghours);
@@ -49,7 +49,7 @@ const Hawker = (props) => {
               image={ele.image}
               onClick={() => props.navigate(`/stall/${ele.uen}`)}
               title={ele.name}
-              line1={`Menu: ${ele.menu.reduce((prev, curr, index) => {
+              line1={`⭐ ${ele.menu.reduce((prev, curr, index) => {
                 return index == 0 ? curr.name : prev + ', ' + curr.name;
                 }, '')}...`}
               line2={`${isOpen(openHours) ? "OPEN" : "CLOSED"}${openHoursString}`}
