@@ -3,8 +3,8 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: #F9EBE0;
-    background-image: url(images/hero_table.png);
-    background-size: 100%;
+    /* background-image: url(images/hero_table.png); */
+    /* background-size: 100%; */
     background-repeat: no-repeat;
     
 }
@@ -85,9 +85,49 @@ code {
     display: -webkit-box;
     -webkit-line-clamp: 1; /* number of lines to show */
     -webkit-box-orient: vertical;
- }
+}
+
+.dish-card {
+    background-color: transparent;
+    border: transparent;
+    border-bottom: transparent;
+}
 
 .card-header {
     padding: 1rem 1rem;
     background-color: transparent;
+}
+
+.dish-name-price {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.dish-btn {
+    font-family: 'Nunito';
+    background-color:#EE693F;
+    border-color: #EE693F;
+    color: #FFFFFF;
+    border-radius: 30px;
+    font-size: 18px;
+}
+
+.btn-outline-primary {
+    font-family: 'Nunito';
+    background-color:#EE693F;
+    border-color: #EE693F;
+    color: #FFFFFF;
+    border-radius: 30px;
+    font-size: 18px;
+}
+
+.btn-primary {
+    font-family: 'Nunito';
+    background-color:#EE693F;
+    border-color: #EE693F;
+    color: #FFFFFF;
+    border-radius: 30px;
+    font-size: 18px;
 }

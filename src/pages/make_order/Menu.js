@@ -30,9 +30,10 @@ const Menu = (props) => {
     <div>
       {
         menus[menu] && (
-          <div className="card m-3 text-start">
+          <div className="dish-card m-3 text-start">
             <img
               alt=""
+              src=""
               style={{
                 height: "10em",
                 width: "100%",
@@ -42,10 +43,11 @@ const Menu = (props) => {
               }}
             />
             <div className="card-body">
-              <div className="card-title em-15 fw-bold">{menus[menu].name} <span class="badge bg-secondary">{form.amount}</span></div>
-              <div className="card-text">{menus[menu].description}</div>
-              <div className="card-text text-success text-bold">{`Price: S$${menus[menu].price}`}</div>
-              <div className="form-floating my-3">
+              <div className="card-title em-15 dish-name-price" style={{height: "30px"}}>{menus[menu].name} <span class="badge bg-secondary">{form.amount}</span></div>
+              <div className="dish-name-price" style={{height: "40px"}}>{`$${menus[menu].price}`}</div>
+              <div className="dish-name-price" style={{color: "#7F7F7F", fontWeight: 400}}>{menus[menu].description}</div>
+
+              <div className="form-floating my-3" style={{color: "#7F7F7F"}}>
                 <textarea
                   className="form-control"
                   placeholder="Leave a comment here"
@@ -54,12 +56,12 @@ const Menu = (props) => {
                   value={form.specialOrder}
                   onChange={e => setForm({...form, specialOrder: e.target.value})}
                 />
-                <label for="floatingTextarea2">Special Order</label>
+                <label for="floatingTextarea2" >Special Instructions (optional)</label>
               </div>
               <div className="btn-group my-3 d-block" role="group" aria-label="Basic example">
-                <button type="button" className="btn btn-primary" onClick={() => setForm({...form, amount: form.amount > 1 ? form.amount - 1 : form.amount})}>-</button>
-                <button type="button" className="btn btn-primary" onClick={() => setForm({...form, amount: 1})}>Reset</button>
-                <button type="button" className="btn btn-primary" onClick={() => setForm({...form, amount: form.amount + 1})}>+</button>
+                <button type="button" className="btn btn-primary dish-btn" onClick={() => setForm({...form, amount: form.amount > 1 ? form.amount - 1 : form.amount})}>-</button>
+                <button type="button" className="btn btn-primary dish-btn" onClick={() => setForm({...form, amount: 1})}>Reset</button>
+                <button type="button" className="btn btn-primary dish-btn" onClick={() => setForm({...form, amount: form.amount + 1})}>+</button>
               </div>
               <div
                 onClick={() => {
@@ -85,7 +87,7 @@ const Menu = (props) => {
                     }
                   })
                 }}
-                className="btn btn-primary"
+                className="btn btn-primary dish-btn"
               >
                 Add to Cart
               </div>
