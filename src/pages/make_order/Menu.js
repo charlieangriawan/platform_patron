@@ -33,10 +33,10 @@ const Menu = (props) => {
           <div className="dish-card m-3 text-start">
             <img
               alt=""
-              src=""
+              src={menus[menu].image}
               style={{
                 height: "10em",
-                width: "100%",
+                width: "10em",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "auto 100%",
                 backgroundImage: `url(${menus[menu].image}), url(https://martialartsplusinc.com/wp-content/uploads/2017/04/default-image-620x600.jpg)`
