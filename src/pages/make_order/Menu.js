@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { navigate, updateCart, getMenu } from '../../redux/reducers/main'
+import { navigate, updateCart, getMenu, back } from '../../redux/reducers/main'
 import { findInList, isFalse } from '../../common/functions'
 
 const Menu = (props) => {
@@ -86,6 +86,7 @@ const Menu = (props) => {
                       specialOrder: form.specialOrder
                     }
                   })
+                  props.back()
                 }}
                 className="btn btn-primary dish-btn"
               >
@@ -101,7 +102,7 @@ const Menu = (props) => {
 
 const mapStateToProps = redux => ({ redux })
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ navigate, updateCart, getMenu }, dispatch)
+  return bindActionCreators({ navigate, updateCart, getMenu, back }, dispatch)
 }
 
 

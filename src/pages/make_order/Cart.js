@@ -4,9 +4,30 @@ import { bindActionCreators } from 'redux'
 import { navigate, updateCart, getMenu, makeOrder } from '../../redux/reducers/main'
 import { findInList, isFalse } from '../../common/functions'
 import ButtonCard from '../../components/ButtonCard'
+import Modal from 'react-modal';
+ 
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
 
 const Cart = (props) => {
   const { cart, menus } = props.redux.main;
+  // Modal Variable
+  let subtitle;
+  const [modalIsOpen,setIsOpen] = useState(false);
+  
+  const openModal = () => { setIsOpen(true); }
+ 
+  const afterOpenModal = () => { subtitle.style.color = '#006400'; }
+ 
+  const closeModal = () => { setIsOpen(false); }
 
   useEffect(() => {
     const { localStorage } = window;
@@ -32,6 +53,18 @@ const Cart = (props) => {
 
   return (
     <div>
+      <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Order Sent"
+      >
+
+        <h2 ref={_subtitle => (subtitle = _subtitle)}>Order Sent</h2>
+        <button onClick={closeModal}>close</button>
+        <image src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Flat_tick_icon.svg/1200px-Flat_tick_icon.svg.png" />
+      </Modal>
       {
         cart && cart.map((ele) => {
           let menuItem = getMenuItem(ele.uen, ele.menuid)
@@ -64,7 +97,10 @@ const Cart = (props) => {
       <button
         type="button"
         className="btn btn-outline-primary"
-        onClick={() => props.makeOrder()}
+        onClick={() => {
+          props.makeOrder()
+          openModal()
+        }}
       >
         Proceed to Payment
       </button>

@@ -1,20 +1,16 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { login } from '../redux/reducers/main'
+import { navigate } from '../redux/reducers/main'
 
 
 const Home = (props) => {
   const [form, setForm] = useState({ phone: "", password: "" })
-  const handleLogin = () => {
-    console.log(form)
-    props.login(form)
-  }
   // redirect to a list of all hawker centres
-  const handleListOfHawkerCentres = () => {}
+  const handleListOfHawkerCentres = () => props.navigate("/hawkers")
 
   // redirect to the patron's previous order(s)
-  const handlePatronsPreviousOrders = () => {}
+  const handlePatronsPreviousOrders = () => props.navigate("/orders")
 
   return (
     <div class="all-bg">
@@ -27,7 +23,7 @@ const Home = (props) => {
 
 const mapStateToProps = redux => ({ redux })
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ login }, dispatch)
+  return bindActionCreators({ navigate }, dispatch)
 }
 
 

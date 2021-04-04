@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { push } from 'connected-react-router'
+import { push, goBack } from 'connected-react-router'
 import initState from './initState'
 
 export default function(state = initState, action) {
@@ -72,6 +72,12 @@ const update = (dispatch, type, data, url=false) => {
 export const navigate = (url) => {
   return (dispatch) => {
     dispatch(push(url));
+  }
+}
+
+export const back = () => {
+  return (dispatch) => {
+    dispatch(goBack());
   }
 }
 
