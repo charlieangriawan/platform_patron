@@ -2,6 +2,8 @@ import axios from 'axios'
 import { push, goBack } from 'connected-react-router'
 import initState from './initState'
 
+import { findInList } from '../../common/functions'
+
 export default function(state = initState, action) {
   switch (action.type) {
     case 'LOGIN':
@@ -9,9 +11,16 @@ export default function(state = initState, action) {
         ...state,
         user: {
           ...state.user,
-          ...action.data
+          ...action.data,
         }
       };
+    case 'LOGGED_IN':
+      return {
+        ...state,
+        user: {
+          loggedin: action.data
+        }
+      }
     case 'REMOVE_CART':
       return {
         ...state,
@@ -52,7 +61,10 @@ export default function(state = initState, action) {
     case 'ADD_ORDERS':
       return {
         ...state,
-        orders: action.data
+        orders: [
+          ...state.orders,
+          ...action.data
+        ]
       }
     case 'DELETE_CART':
       return {
@@ -62,11 +74,6 @@ export default function(state = initState, action) {
     default:
       return state
   }
-}
-
-const update = (dispatch, type, data, url=false) => {
-  dispatch({ type, data });
-  if (url) { dispatch(push(url)); }
 }
 
 export const navigate = (url) => {
@@ -92,12 +99,60 @@ export const login = (form) => {
       })
         .then(function (res) {
           console.log(res);
-          update(dispatch, "LOGIN", form, "/")
+          dispatch({ type: "LOGIN", form });
+          dispatch({ type: 'LOGGED_IN', data: true });
+          dispatch(push("/"));
         })
         .catch(function (error) {
           console.log(error);
         })
-    } else { update(dispatch, "LOGIN", form, "/") }
+    } else {
+      dispatch({ type: "LOGIN", form });
+      dispatch({ type: 'LOGGED_IN', data: true });
+      dispatch(push("/"));
+    }
+  }
+}
+
+export const logout = () => {
+  return (dispatch, getState) => {
+    if (getState().main.backend) {
+      axios({
+        method: 'post',
+        url: 'https://jiak-api.vitaverify.me/api/v1/customer/auth/logout',
+        withCredentials: true
+      })
+        .then(function (res) {
+          console.log(res)
+          dispatch({ type: 'LOGGED_IN', data: false });
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+    } else {
+
+    }
+  }
+}
+
+export const gateway = () => { // isLoggedIn
+  return (dispatch, getState) => {
+    if (getState().main.backend) {
+      axios({
+        method: 'get',
+        url: 'https://jiak-api.vitaverify.me/api/v1/customer/auth/gateway',
+        withCredentials: true
+      })
+        .then(function (res) {
+          console.log(res)
+          dispatch({ type: 'LOGGED_IN', data: true });
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+    } else {
+
+    }
   }
 }
 
@@ -112,12 +167,18 @@ export const register = (form) => {
       })
         .then(function (res) {
           console.log(res);
-          update(dispatch, "LOGIN", form, "/")
+          dispatch({ type: "LOGIN", form });
+          dispatch({ type: 'LOGGED_IN', data: true });
+          dispatch(push("/"));
         })
         .catch(function (error) {
           console.log(error);
         })
-    } else { update(dispatch, "LOGIN", form, "/") }
+    } else {
+      dispatch({ type: "LOGIN", form });
+      dispatch({ type: 'LOGGED_IN', data: true });
+      dispatch(push("/"));
+    }
   }
 }
 
@@ -244,6 +305,15 @@ export const retrieveOrders = () => {
       .then(function (res) {
         console.log(res);
         dispatch({ type: 'ADD_ORDERS', data: res.data })
+        // ADD STALLS for each order if not already in redux
+        for (let i = 0; i < res.data.length; i++) {
+          if (res.data[i] == null || res.data[i].length == 0) continue
+          const stall = findInList(getState().main.stalls, "uen", res.data[i][0].uen)
+          if (!stall) {
+            console.log(i)
+            dispatch(getStalls({ uen: res.data[i][0].uen }))
+          }
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -255,8 +325,10 @@ export const retrieveOrders = () => {
 export const makeOrder = () => {
   return (dispatch, getState) => {
     if (getState().main.backend) {
+      // get sorted cart
       let cart = getState().main.cart
       cart = cart.sort((a, b) => b.uen - a.uen)
+      // for each cart item, if same uen, oreder together, else finish order and make new order
       let start = 0
       for (let i = 0; i < cart.length - 1; i++) {
         if (cart[i].uen != cart[i + 1].uen) {
@@ -271,6 +343,14 @@ export const makeOrder = () => {
           })
           .then(function (res) {
             console.log(res);
+            let temp = [cart.slice(start, i + 1)]
+            for (let i=0; i<temp.length; i++) {
+              if (temp[i] == null) continue
+              for (let j=0; j<temp[i].length; j++) {
+                temp[i][j] = { ...temp[i][j], status: "Order made" }
+              }
+            }
+            dispatch({ type: 'ADD_ORDERS', data: temp })
           })
           .catch(function (error) {
             console.log(error);
@@ -292,12 +372,22 @@ export const makeOrder = () => {
         })
         .then(function (res) {
           console.log(res);
+          let temp = [cart.slice(start, cart.length + 1)]
+          for (let i=0; i<temp.length; i++) {
+            if (temp[i] == null) continue
+            for (let j=0; j<temp[i].length; j++) {
+              temp[i][j] = { ...temp[i][j], status: "Order made" }
+            }
+          }
+          dispatch({ type: 'ADD_ORDERS', data: temp })
         })
         .catch(function (error) {
           console.log(error);
           return
         })
       }
+
+      dispatch(retrieveOrders())
       dispatch({ type: 'DELETE_CART' })
       const { localStorage } = window;
       localStorage.removeItem('cs206_cart')

@@ -19,15 +19,27 @@ const customStyles = {
 
 const Cart = (props) => {
   const { cart, menus } = props.redux.main;
-  // Modal Variable
-  let subtitle;
+  const [modalDescription, setModalDescription] = useState({ text: "", style: {}, image: "" })
   const [modalIsOpen,setIsOpen] = useState(false);
   
   const openModal = () => { setIsOpen(true); }
- 
-  const afterOpenModal = () => { subtitle.style.color = '#006400'; }
- 
+  const afterOpenModal = () => {}
   const closeModal = () => { setIsOpen(false); }
+  const setModal = (type) => {
+    if (type == 'success') {
+      setModalDescription({
+        text: "Order Sent",
+        style: { color: 'green' },
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Flat_tick_icon.svg/1200px-Flat_tick_icon.svg.png"
+      })
+    } else if (type == 'loggedout') {
+      setModalDescription({
+        text: "Not Logged In",
+        style: { color: 'red' },
+        image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Ficons-for-free.com%2Fcancel%2Bdanger%2Berror%2Bexit%2Bfault%2Bproblem%2Bicon-1320086092655159088%2F&psig=AOvVaw0e3JCatOebqQrCYup5VbX-&ust=1617686951871000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDYmdWv5u8CFQAAAAAdAAAAABAD"
+      })
+    }
+  }
 
   useEffect(() => {
     const { localStorage } = window;
@@ -58,12 +70,12 @@ const Cart = (props) => {
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}
-        contentLabel="Order Sent"
+        contentLabel=""
       >
 
-        <h2 ref={_subtitle => (subtitle = _subtitle)}>Order Sent</h2>
+        <h2 style={modalDescription.style}>{modalDescription.text}</h2>
         <button onClick={closeModal}>close</button>
-        <image src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Flat_tick_icon.svg/1200px-Flat_tick_icon.svg.png" />
+        <image src={modalDescription.image} />
       </Modal>
       {
         cart && cart.map((ele) => {
@@ -98,11 +110,17 @@ const Cart = (props) => {
         type="button"
         className="btn btn-outline-primary"
         onClick={() => {
-          props.makeOrder()
-          openModal()
+          if (props.redux.main.user.loggedin) {
+            props.makeOrder()
+            setModal('success')
+            openModal()
+          } else {
+            setModal('loggedout')
+            openModal()
+          }
         }}
       >
-        Proceed to Payment
+        Order Now
       </button>
     </div>
   )
