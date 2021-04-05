@@ -75,7 +75,7 @@ const Cart = (props) => {
               title={menuItem.name}
               badge={ele.quantity}yap
               line1={`$${ele.quantity*menuItem.price}`}
-              b1={() => props.navigate(`/menu/${ele.menuid}`)}
+              b1={() => props.navigate(`/menu?_id=${ele.menuid}&uen=${ele.uen}`)}
               b1Name="Edit"
               b2={() => {
                 const { localStorage } = window;
