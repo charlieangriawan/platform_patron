@@ -26,7 +26,7 @@ const Hawkers = (props) => {
   }
   return (
     <div>
-      Orders
+      <div className="headers" > Orders </div>
       {
         orders && orders.map((ele) => {
           if (ele == null || ele.length < 1) return <></>
