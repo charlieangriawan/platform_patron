@@ -20,7 +20,7 @@ const Stall = (props) => {
 
   return (
     <div>
-      <div className="headers" >Dishes</div>
+      <div className="headers">Dishes: {`${props.redux.main.stalls[stall] && props.redux.main.stalls[stall].name}`}</div>
       {
         props.redux.main.stalls[stall] && props.redux.main.stalls[stall].menu.map((ele, num) => {
           console.log(ele)

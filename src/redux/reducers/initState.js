@@ -4,6 +4,7 @@ import menus from './states/menus'
 export default {
   backend: true,
   user: {
+    loggedin: false,
     date: 0,
     phone: "",
     email: "",
@@ -31,9 +32,10 @@ export default {
       }
     ]
   },
-  orders: null,
+  orders: [],
   cart: [],
   menus: [],
   stalls: [],
-  hawkers: []
+  hawkers: [],
+  modal: false
 }

@@ -21,7 +21,7 @@ const Hawker = (props) => {
 
   return (
     <div>
-      <div className="headers" >Stalls</div>
+      <div className="headers">Stalls: {`${props.redux.main.hawkers[hawker] && props.redux.main.hawkers[hawker].name}`}</div>
       {
         props.redux.main.hawkers[hawker] && props.redux.main.hawkers[hawker].stalls.map((ele, num) => {
           const openHours = openingHours(ele.operatinghours);

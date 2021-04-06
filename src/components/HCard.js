@@ -19,6 +19,7 @@ const cardCss = {
 }
 
 const HCard = (props) => {
+  if (props.title == "undefined") return <></>
   return (
     <div
       className={`card flex-row m-2 em-8 ${props.classname}`}
