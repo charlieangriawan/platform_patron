@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { navigate, updateCart, getMenu, back } from '../../redux/reducers/main'
-import { findInList, isFalse } from '../../common/functions'
+import { findInList, findByKeysInList, isFalse } from '../../common/functions'
 
 const Menu = (props) => {
   const [menu, setMenu] = useState(0);
@@ -16,7 +16,7 @@ const Menu = (props) => {
   useEffect(() => {
     let num = null;
     const { _id, uen } = props.redux.router.location.query;
-    num = findInList(menus, "_id", _id)
+    num = findByKeysInList(menus, "_id", _id, "uen", uen)
     if (isFalse(num)) {
       // get hawker
       props.getMenu({ uen, id: _id })

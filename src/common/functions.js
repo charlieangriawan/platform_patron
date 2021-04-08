@@ -4,6 +4,12 @@ export const findInList = (list, key, value) => {
   }
   return false;
 }
+export const findByKeysInList = (list, k1, v1, k2, v2) => {
+  for (let i = 0; i < list.length; i++) {
+    if (list[i][k1] == v1 && list[i][k2] == v2) return i;
+  }
+  return false;
+}
 export const getParam = (str, pre, post="") => {
   str = str.replace(pre, "");
   str = str.replace(post, "");
