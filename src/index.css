@@ -3,8 +3,6 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: #F9EBE0;
-    /* background-image: url(images/hero_table.png); */
-    /* background-size: 100%; */
     background-repeat: no-repeat;
     
 }
@@ -24,6 +22,9 @@ code {
     left: 30px;
     top: 472px;
     
+}
+.border {
+    border: 0px!important;
 }
 
 .elements-login {
@@ -130,4 +131,22 @@ code {
     color: #FFFFFF;
     border-radius: 30px;
     font-size: 18px;
+}
+
+.bg-light {
+    background-color: transparent!important;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    font-family: 'Montserrat';
+    color:  #EE693F;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.navbar-toggler {
+    background-color: transparent;
+    border: 0px;
 }

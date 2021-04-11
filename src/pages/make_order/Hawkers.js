@@ -22,7 +22,7 @@ const Hawkers = (props) => {
               image={ele.image}
               onClick={() => props.navigate(`/hawker/${ele._id}`)}
               title={ele.name}
-              line1={`Stalls: ${ele.stalls.reduce((prev, curr, index) => {
+              line1={`⭐ ${ele.stalls.reduce((prev, curr, index) => {
                 return index == 0 ? curr.name : prev + ', ' + curr.name;
                 }, '')}...`}
             />
