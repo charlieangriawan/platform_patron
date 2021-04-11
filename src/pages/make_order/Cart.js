@@ -77,6 +77,7 @@ const Cart = (props) => {
         <button onClick={closeModal}>close</button>
         <image src={modalDescription.image} />
       </Modal>
+
       {
         cart && cart.map((ele) => {
           let menuItem = getMenuItem(ele.uen, ele.menuid)
@@ -105,7 +106,9 @@ const Cart = (props) => {
           )
         })
       }
-      <div>Total: </div>
+
+    <div>Total: ${cart.reduce((a, v) => a = a + v.quantity * getMenuItem(v.uen, v.menuid).price, 0)}</div>
+
       <button
         type="button"
         className="btn btn-outline-primary"
