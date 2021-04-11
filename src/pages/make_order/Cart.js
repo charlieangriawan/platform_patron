@@ -87,7 +87,7 @@ const Cart = (props) => {
               image={menuItem.image}
               title={menuItem.name}
               badge={ele.quantity}yap
-              line1={`$${ele.quantity*menuItem.price}`}
+              line1={`$${Math.round(ele.quantity*menuItem.price * 100)/ 100}`}
               b1={() => props.navigate(`/menu?_id=${ele.menuid}&uen=${ele.uen}`)}
               b1Name="Edit"
               b2={() => {
@@ -107,7 +107,7 @@ const Cart = (props) => {
         })
       }
 
-    <div>Total: ${cart.reduce((a, v) => a = a + v.quantity * getMenuItem(v.uen, v.menuid).price, 0)}</div>
+    <div>Total: ${cart.reduce((a, v) => a = Math.round((a + v.quantity * getMenuItem(v.uen, v.menuid).price) * 100) / 100, 0)   }</div>
 
       <button
         type="button"
