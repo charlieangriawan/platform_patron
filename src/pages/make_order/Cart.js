@@ -87,7 +87,7 @@ const Cart = (props) => {
               image={menuItem.image}
               title={menuItem.name}
               badge={ele.quantity}yap
-              line1={`$${ele.quantity*menuItem.price}`}
+              line1={`$${Math.round(ele.quantity*menuItem.price * 100)/ 100}`}
               b1={() => props.navigate(`/menu?_id=${ele.menuid}&uen=${ele.uen}`)}
               b1Name="Edit"
               b2={() => {
