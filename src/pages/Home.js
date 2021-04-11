@@ -14,8 +14,8 @@ const Home = (props) => {
 
   return (
     <div class="all-bg">
-      <button type="button" className="btn btn-primary btn-lg btn1-main hero-image" style={{ color: "#FFFFFF", fontWeight: 700, fontSize: '16px'}} onClick={handleListOfHawkerCentres}>Hawker Centres</button>
-      <button type="button" className="btn btn-primary btn-lg btn2-main hero-image" style={{ color: "#FFFFFF", fontWeight: 700, fontSize: '16px'}} onClick={handlePatronsPreviousOrders}>Previous Orders</button>
+      <button type="button" className="btn btn-primary btn-lg btn1-main hero-image" style={{ color: "#FFFFFF", fontWeight: 700, fontSize: '16px'}} onClick={handleListOfHawkerCentres}><img src="/HawkerCentres.jpeg" width="120px" height="120px"  style={{borderRadius: '100px', marginLeft: '0px', marginTop: '0px'}}></img> <div style={{marginTop: '10px'}}>  Hawker Centres </div></button>
+      <button type="button" className="btn btn-primary btn-lg btn2-main hero-image" style={{ color: "#FFFFFF", fontWeight: 700, fontSize: '16px'}} onClick={handlePatronsPreviousOrders}><img src="/previous.svg" width="120px" height="120px"  style={{borderRadius: '20px', marginLeft: '0px', marginTop: '0px'}}></img> <div style={{marginTop: '10px'}}>  Previous Orders </div></button>
 
     </div>
   )
