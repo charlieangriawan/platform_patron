@@ -107,7 +107,7 @@ const Cart = (props) => {
         })
       }
 
-    <div>Total: ${cart.reduce((a, v) => a = a + v.quantity * getMenuItem(v.uen, v.menuid).price, 0)}</div>
+    <div>Total: ${cart.reduce((a, v) => a = Math.round((a + v.quantity * getMenuItem(v.uen, v.menuid).price) * 100) / 100, 0)   }</div>
 
       <button
         type="button"
