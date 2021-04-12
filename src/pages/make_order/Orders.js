@@ -60,7 +60,8 @@ const Hawkers = (props) => {
                 <HCard
                   title={`${menus[findInList(menus, "_id", ele.menuId)] && menus[findInList(menus, "_id", ele.menuId)].name}`}
                   line2={`Price: S$${menus[findInList(menus, "_id", ele.menuId)] && menus[findInList(menus, "_id", ele.menuId)].price} * ${ele.quantity} item(s) = S$${
-                    menus[findInList(menus, "_id", ele.menuId)] && (menus[findInList(menus, "_id", ele.menuId)].price * ele.quantity)
+                    // menus[findInList(menus, "_id", ele.menuId)] && (menus[findInList(menus, "_id", ele.menuId)].price * ele.quantity)
+                    menus[findInList(menus, "_id", ele.menuId)] && Math.round(menus[findInList(menus, "_id", ele.menuId)].price * ele.quantity * 100) / 100
                   }`}
                   image={menus[findInList(menus, "_id", ele.menuId)] && menus[findInList(menus, "_id", ele.menuId)].image}
                 />
@@ -78,7 +79,7 @@ const Hawkers = (props) => {
               <HCard
                 title={`${stalls[findInList(stalls, "uen", ele[0].uen)] && stalls[findInList(stalls, "uen", ele[0].uen)].name}`}
                 line1={`${ele[0].status}`}
-                line2={`${ele[0].uen}`}
+                // line2={`${ele[0].uen}`}
                 l1Class={ele[0].status == "Order made" ? "text-success" : "text-danger"}
                 image={stalls[findInList(stalls, "uen", ele[0].uen)] && stalls[findInList(stalls, "uen", ele[0].uen)].image}
                 onClick={() => {
