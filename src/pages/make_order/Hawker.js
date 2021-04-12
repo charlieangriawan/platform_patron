@@ -38,7 +38,7 @@ const Hawker = (props) => {
               else if (openHours.open < 12) {
                 openHoursString = ` - Opens at ${openHours.open}AM`
               } else {
-                openHoursString = ` - Opens at ${openHours.open}PM`
+                openHoursString = ` - Opens at ${openHours.open - 12}PM`
               }
 
             }

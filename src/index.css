@@ -150,3 +150,12 @@ code {
     background-color: transparent;
     border: 0px;
 }
+
+h2 {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 50px;
+    color: #000000;
+}
