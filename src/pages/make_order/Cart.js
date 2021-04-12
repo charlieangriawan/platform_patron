@@ -28,13 +28,13 @@ const Cart = (props) => {
   const setModal = (type) => {
     if (type == 'success') {
       setModalDescription({
-        text: "Order Sent",
+        text: "Order sent. Check the status of your order under Previous Orders.",
         style: { color: 'green' },
         image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Flat_tick_icon.svg/1200px-Flat_tick_icon.svg.png"
       })
     } else if (type == 'loggedout') {
       setModalDescription({
-        text: "Not Logged In",
+        text: "Not logged in. Please log in.",
         style: { color: 'red' },
         image: "https://www.google.com/url?sa=i&url=https%3A%2F%2Ficons-for-free.com%2Fcancel%2Bdanger%2Berror%2Bexit%2Bfault%2Bproblem%2Bicon-1320086092655159088%2F&psig=AOvVaw0e3JCatOebqQrCYup5VbX-&ust=1617686951871000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDYmdWv5u8CFQAAAAAdAAAAABAD"
       })
